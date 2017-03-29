@@ -1,9 +1,6 @@
-
    
-    
     var myArry = ["baseball","basketball","golf","football","soccer"];
     
-
    $( document ).ready(function() {
 // creates the buttons
     function createButton(){
