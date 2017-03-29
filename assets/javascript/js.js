@@ -1,5 +1,5 @@
 
-   // var apiKey = "dc6zaTOxFJmzC";
+   
     
     var myArry = ["baseball","basketball","golf","football","soccer"];
     
@@ -14,7 +14,6 @@
          myInterestButton.attr("data-name",myArry[i]);
          myInterestButton.text(myArry[i]);
          myInterestButton.addClass("sport");
-         // myInterestButton.attr
          $("#sB").append(myInterestButton);
         
           }
@@ -32,7 +31,7 @@
 //add in giphs and controls the state of the gip ie still or animated
   function sportsInfo(){
     var myInterest = $(this).attr("data-name");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q="+myInterest+"&api_key=dc6zaTOxFJmzC&limit=5"; 
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q="+myInterest+"&api_key=dc6zaTOxFJmzC&limit=5"; 
    
 
   $("#sport").empty();
