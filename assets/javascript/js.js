@@ -1,11 +1,11 @@
-alert("hello world");
-    var apiKey = "dc6zaTOxFJmzC";
+
+   // var apiKey = "dc6zaTOxFJmzC";
     
     var myArry = ["baseball","basketball","golf","football","soccer"];
     
 
    $( document ).ready(function() {
-// createst the buttons
+// creates the buttons
     function createButton(){
 
       $("#sB").empty();
@@ -29,10 +29,11 @@ alert("hello world");
   });
 		createButton();
 	
-//
-function sportsInfo(){
-  var myInterest = $(this).attr("data-name");
-  var queryURL = "http://api.giphy.com/v1/gifs/search?q="+myInterest+"&api_key=dc6zaTOxFJmzC&limit=5";   
+//add in giphs and controls the state of the gip ie still or animated
+  function sportsInfo(){
+    var myInterest = $(this).attr("data-name");
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q="+myInterest+"&api_key=dc6zaTOxFJmzC&limit=5"; 
+   
 
   $("#sport").empty();
  		$.ajax({
@@ -40,7 +41,7 @@ function sportsInfo(){
               method: "GET"
             })
     .done(function(response) {
-              // $("#movie-view").text(JSON.stringify(response));
+              
         var results = (response.data);
         var move = true;
               
@@ -52,38 +53,33 @@ function sportsInfo(){
              var gifImage = $("<img>");
                  gifImage.addClass("flip");
                  gifImage.attr("src", results[i].images.fixed_height_still.url);
+                 gifImage.attr("data-still",results[i].images.fixed_height_still.url);
+                 gifImage.attr("data-animate",results[i].images.fixed_height.url);
+                 gifImage.attr("data-state","still");
+
              $("#sport").append(p);
              $("#sport").append(gifImage);         
            }
-           $(document).on("click",".flip",function(){
-            alert("image was clicked");
+           // checks state and changes state on click
+            $(".flip").on("click", function() {
+      
+            var state = $(this).attr("data-state");
             
-            if(move = true){
-              move = false;
-             gifImage.attr("src", results[i].images.fixed_height.url);
+            if (state === "still") {
+             $(this).attr("src", $(this).attr("data-animate"));
+            //  $(this).attr("src", $(this).data("animate");
+              $(this).attr("data-state", "animate");
             }
-            else{
-              move = true;
-              gifImage.attr("src", results[i].images.fixed_height_still.url);
+            else {
+              $(this).attr("src", $(this).attr("data-still"));
+              $(this).attr("data-state", "still");
             }
-          });
-    });    
-       
- }
- // change the gif from still to not still
- function changeState(){
-    gifImage.on("click",function(){
-      alert("image was clicked");
     });
-    // var move = true;
-    
-    // if(move){
-    //   move=false;
-    //   gifImage.attr("src", results[i].images.fixed_height.url);
-    // } 
+         
+    });    
   }
 
- //$(document).on("click",".flip",changeState);
+ 
  $(document).on("click",".sport",sportsInfo);
  
     
