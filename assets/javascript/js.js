@@ -19,13 +19,18 @@
     $("#addSport").on("click", function() {
     event.preventDefault();
     var newSport = $("#sport-Input").val().trim();
+    if(newSport === ""){
+      alert("Must Enter a Sport");
+    }
+    
+    else{
     myArry.push(newSport);
     createButton(); 
-  
+    }
   });
 		createButton();
 	
-//add in giphs and controls the state of the gip ie still or animated
+//add in gifs and controls the state of the gip ie still or animated
   function sportsInfo(){
     var myInterest = $(this).attr("data-name");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q="+myInterest+"&api_key=dc6zaTOxFJmzC&limit=5"; 
@@ -63,14 +68,14 @@
             
             if (state === "still") {
              $(this).attr("src", $(this).attr("data-animate"));
-            //  $(this).attr("src", $(this).data("animate");
+        
               $(this).attr("data-state", "animate");
             }
             else {
               $(this).attr("src", $(this).attr("data-still"));
               $(this).attr("data-state", "still");
             }
-    });
+      });
          
     });    
   }
